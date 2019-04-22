@@ -66,6 +66,10 @@
             <tag name="messenger.transport_factory" />
         </service>
 
+        <service id="messenger.transport.doctrine.factory" class="Symfony\Component\Messenger\Transport\Doctrine\DoctrineTransportFactory">
+            <tag name="messenger.transport_factory" />
+        </service>
+
         <service id="messenger.transport.sync.factory" class="Symfony\Component\Messenger\Transport\Sync\SyncTransportFactory">
             <tag name="messenger.transport_factory" />
         </service>
