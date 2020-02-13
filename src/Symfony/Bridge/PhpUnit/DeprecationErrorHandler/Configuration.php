@@ -91,6 +91,7 @@ class Configuration
     public function tolerates(array $deprecations)
     {
         $deprecationCounts = [];
+ 
         foreach ($deprecations as $key => $deprecation) {
             if (false !== strpos($key, 'Count') && false === strpos($key, 'legacy')) {
                 $deprecationCounts[$key] = $deprecation;
@@ -101,7 +102,7 @@ class Configuration
             return false;
         }
         foreach (['self', 'direct', 'indirect'] as $deprecationType) {
-            if ($deprecationCounts['remaining '.$deprecationType.'Count'] > $this->thresholds[$deprecationType]) {
+            if (isset($deprecationCounts['remaining '.$deprecationType.'Count']) && $deprecationCounts['remaining '.$deprecationType.'Count'] > $this->thresholds[$deprecationType]) {
                 return false;
             }
         }
