@@ -61,7 +61,6 @@
         "symfony/form": "For using the FormExtension",
         "symfony/http-kernel": "For using the HttpKernelExtension",
         "symfony/routing": "For using the RoutingExtension",
-        "symfony/templating": "For using the TwigEngine",
         "symfony/translation": "For using the TranslationExtension",
         "symfony/yaml": "For using the YamlExtension",
         "symfony/security-core": "For using the SecurityExtension",
