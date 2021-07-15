@@ -13,6 +13,7 @@ namespace Symfony\Component\Messenger;
 
 use Symfony\Component\Messenger\Exception\LogicException;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Messenger\Stamp\StampInterface;
 
 /**
  * Leverages a message bus to expect a single, synchronous message handling and return its result.
@@ -31,16 +32,17 @@ trait HandleTrait
      * the last one usually returning the handler result.
      *
      * @param object|Envelope $message The message or the message pre-wrapped in an envelope
+     * @param StampInterface[] $stamps Stamps to be set on the Envelope which are used to control middlewares behaviours
      *
      * @return mixed The handler returned value
      */
-    private function handle(object $message)
+    private function handle(object $message, array $stamps = [])
     {
         if (!$this->messageBus instanceof MessageBusInterface) {
             throw new LogicException(sprintf('You must provide a "%s" instance in the "%s::$messageBus" property, "%s" given.', MessageBusInterface::class, static::class, get_debug_type($this->messageBus)));
         }
 
-        $envelope = $this->messageBus->dispatch($message);
+        $envelope = $this->messageBus->dispatch($message, $stamps);
         /** @var HandledStamp[] $handledStamps */
         $handledStamps = $envelope->all(HandledStamp::class);
 
