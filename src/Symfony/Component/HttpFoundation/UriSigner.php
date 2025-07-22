@@ -123,9 +123,9 @@ class UriSigner
 
         match ($status) {
             self::STATUS_VALID => null,
-            self::STATUS_INVALID => throw new UnverifiedSignedUriException(),
+            self::STATUS_MISSING => throw new UnsignedUriException(),
             self::STATUS_EXPIRED => throw new ExpiredSignedUriException(),
-            default => throw new UnsignedUriException(),
+            default => throw new UnverifiedSignedUriException(),
         };
     }
 
